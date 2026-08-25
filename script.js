@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function toggleMenu() {
-    document.querySelector(".nav-links").classList.toggle("show");
+  const nav = document.querySelector(".nav-links");
+  const btn = document.getElementById('hamburger-btn');
+  if (!nav) return;
+  const showing = nav.classList.toggle("show");
+  if (btn) btn.setAttribute('aria-expanded', showing ? 'true' : 'false');
 }
 
 // The text you want to reveal
@@ -162,6 +166,41 @@ document.addEventListener("DOMContentLoaded", function () {
       target.innerHTML += "<br>"; // Add a line break
       i = 0; // Reset the index to start typing the second part
       type(secondText); // Type the second part
+  });
+});
+
+// Enhance hamburger keyboard interaction and close menu on link click / outside click
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger-btn');
+  const nav = document.querySelector('.nav-links');
+
+  if (!hamburger || !nav) return;
+
+  // Keyboard toggle (Enter / Space)
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  // Close menu when a nav link is clicked (use capture to ensure it fires)
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (nav.classList.contains('show')) {
+        nav.classList.remove('show');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Close when clicking outside the menu
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('show')) return;
+    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+      nav.classList.remove('show');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
   });
 });
 

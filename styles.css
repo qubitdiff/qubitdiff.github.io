@@ -134,21 +134,36 @@ header {
         display: none; /* Hide links by default */
         flex-direction: column;
         position: absolute;
-        top: 60px;
+        top: 100%;
         right: 0;
-        background: rgba(0, 0, 0, 0.9);
-        padding-right: 20px; /* Add some space on the right */
+        left: 0;
+        background: rgba(0, 0, 0, 0.95);
         width: 100%;
         text-align: center;
-        padding: 10px 0;
+        padding: 8px 0;
+        -webkit-overflow-scrolling: touch; /* smoother scrolling on iOS */
+        z-index: 10001; /* ensure menu is above other elements */
     }
 
     .nav-links.show {
         display: flex; /* Show menu when toggled */
+        pointer-events: auto;
     }
 
     .nav-links li {
         padding: 10px;
+    }
+
+    .nav-links a {
+        display: block; /* Make links full-width and easy to tap */
+        padding: 12px 16px;
+        width: 100%;
+    }
+
+    .hamburger {
+        z-index: 10002; /* ensure hamburger is above the menu */
+        padding: 6px 10px; /* larger hit area */
+        border-radius: 6px;
     }
 }
 
