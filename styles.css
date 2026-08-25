@@ -51,6 +51,10 @@ body {
 
 header {
     padding: 20px;
+    /* Ensure header receives pointer events and sits above page content */
+    position: relative;
+    z-index: 10003;
+    pointer-events: auto;
 }
 
 .logo {
@@ -101,6 +105,19 @@ header {
     font-size: 30px;
     cursor: pointer;
     display: none; /* Hidden by default, shown on mobile */
+}
+
+/* Improve touch responsiveness */
+.hamburger {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Ensure header container is above content when injected */
+#header-container {
+    position: relative;
+    z-index: 10003;
+    pointer-events: auto;
 }
 
 .nav-links {
