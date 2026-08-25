@@ -56,12 +56,19 @@ header {
 .logo {
     color: white;
     margin: 0 20px 0 0;
-    font-size: var(--logo-font-size);
+    /* Responsive font-size that scales but stays within sensible bounds */
+    font-size: clamp(20px, 4.5vw, var(--logo-font-size));
     font-weight: bold;
     margin-left: 15px;
-    text-shadow: 
-        0 0 5px #FFFFFF,   /* White glow */
-        0 0 10px #FFFFFF;  /* White glow */
+    text-shadow:
+        0 0 5px #FFFFFF,
+        0 0 10px #FFFFFF;
+    /* Allow the logo to shrink on small screens so other controls (hamburger) remain visible */
+    flex: 0 1 auto;
+    max-width: 65%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .page-title {
@@ -175,6 +182,19 @@ header {
 .gif-container img {
     max-width: 75px;
     max-height: 75px;
+}
+
+/* Make logo and gif scale down on small screens so hamburger stays visible */
+@media (max-width: 768px) {
+    .logo {
+        max-width: 55%;
+        font-size: clamp(18px, 6vw, 34px);
+    }
+
+    .gif-container img {
+        max-width: 48px;
+        max-height: 48px;
+    }
 }
 
 
