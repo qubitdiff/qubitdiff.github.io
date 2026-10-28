@@ -1,1 +1,1 @@
-# qubituwu.github.io
+# qubitdiff.github.io
